@@ -1,0 +1,82 @@
+.exit{
+    //POMERI EXIT GORE
+    position:absolute;
+    right: -30px;
+
+    img{
+        position: absolute;
+        bottom: 15%;
+      
+       
+    }
+}
+
+
+.header{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    
+
+    div{
+        margin-left: 15px;
+        pointer-events: none;
+        
+    }
+}
+.name{
+   font-size: 19px;
+}
+.sightings{
+    color: #949ea0;
+    font-size: 10px;
+    line-height: 10px;
+    pointer-events: none;
+    padding: auto;
+} 
+
+.information{
+    width: 100%;
+    label{
+      
+        color: #949ea0;
+        font-size: 10px;
+        line-height: 10px;
+        pointer-events: none;
+    }
+    div{
+        padding: 5px 0;
+        pointer-events: none;
+    }
+}
+.logout{
+    position: relative;
+    background-color: #ecbcb3;
+    color: #fff;
+    font-weight: bold;
+    height: 30px;
+    width: 100px;
+    margin-top: 55px;
+    
+    
+
+    // DA LI TREBA ZADAVATI RUCNO?????????????//
+    // margin-top: 50px;
+    // margin-left: 50px;
+    // margin-right: 50px;
+}
+.inf{
+    //
+    
+}
+
+.content{
+//    margin-top: 15px;
+//    margin-left: 30px;
+//    margin-right: 80px;
+   display: flex;
+   position: relative;
+   flex-direction: column;
+   align-items: center;
+
+}

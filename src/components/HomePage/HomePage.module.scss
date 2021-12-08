@@ -1,0 +1,60 @@
+.content{
+    height: 80vh;    
+    background: url('../../assets/images/pl-hero.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    img{
+        position:relative ;
+    }
+    
+}
+.title{
+font-style: normal;
+font-weight: 600;
+font-size: 40px;
+line-height: 40px;
+text-align: center;
+}
+.subtitle{
+    font-family: Playfair Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 17px;
+    text-align: center;
+
+}
+.input{
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 18px;
+    width:  500px;
+    height: 50px;
+   
+
+}
+.inputDiv{
+    position: relative; //glavni objekat relativan
+    max-width: 500px;
+    img{
+        position: absolute; //apsolutno jer se prikazuje u osnosu na drugi element
+        right: 20px; 
+        top: 15px;      
+
+    }
+
+}
+.text_contenet{
+    text-align: center;
+    margin-top:110px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column; //menja po y osi, i zato koristim align-items, a ne justify content
+
+}
