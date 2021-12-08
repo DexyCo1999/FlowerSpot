@@ -1,26 +1,38 @@
-import React from 'react';
+import React , {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header/Header';
+import HomePage from './components/HomePage/HomePage';
+import FlowersList from './components/FlowersList/FlowersList';
+import CreateAccount from './components/CreateAccount/CreateAccount';
+import Input from './components/Input/Input';
+import WelcomeBack from './components/WelcomeBack/WelcomeBack';
+import ProfileModalDialog from './components/ProfileModalDialog/ProfileModalDialog';
 
 function App() {
+
+  //const[value, setValue] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <HomePage/>
+      
+     
+      
     </div>
   );
 }
+/*  
+<Header />
+<HomePage/>
+ <CreateAccount/>
+
+
+ <WelcomeBack/>
+     <CreateAccount/>
+     <ProfileModalDialog/>
+     */
 
 export default App;
+//<Input label={''} value={value} onChange={(e)=>setValue(e.target.value)}/>
