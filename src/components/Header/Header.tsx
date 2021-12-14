@@ -6,7 +6,7 @@ import CreateAccount from "../CreateAccount/CreateAccount";
 import WelcomeBack from "../WelcomeBack/WelcomeBack";
 import ProfileModalDialog from "../ProfileModalDialog/ProfileModalDialog";
 import profilePhoto from "../../assets/images/profilePhoto2.png";
-import axios from "axios";
+import informationUser from "../../services/userInfoService";
 
 
 
@@ -16,26 +16,21 @@ export default function Header() {
   const [showProfileModal, setProfileModal] = useState(false);
 
   const [login, setLogin] = useState(false);
+
   const [userInfo, setUserInfo] = useState({
     first_name: "",
     last_name: "",
   });
 
- // const { first_name, last_name } = userInfo;
-
   const token = localStorage.getItem("auth_token");
 
   useEffect(() => {
-    setLogin(!!token);
-  }, [token]);
+    setLogin(!!token); // --> Ako postoji token, korisnik je logovan
+  },[token]);
 
-  useEffect(() => {
-    axios
-      .get("https://flowrspot-api.herokuapp.com/api/v1/users/me", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-        },
-      })
+  // Prikupljanje informacija o korisniku
+  useEffect(() => {   
+    informationUser.getUserInfo()
       .then(function (response: any) {
         setUserInfo({
           first_name: response.data.user.first_name,
@@ -45,7 +40,7 @@ export default function Header() {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [token]); //Da bi se osvezavalo cim se neko loguje, kreira nalog
 
   return (
     <div className={styles.header}>
@@ -57,10 +52,7 @@ export default function Header() {
       <div className={styles.right}>
         <div className="flowers">Flowers</div>
         <div className="LatestSigh">Latest Sightings</div>
-        <div className="favs" onClick={() => setLogin(!login)}>
-          {" "}
-          Favourites
-        </div>
+        <div className="favs"> Favourites </div>
 
         {login === false ? (
           <>
@@ -98,7 +90,8 @@ export default function Header() {
               show={showProfileModal}
               onClose={() => setProfileModal(false)}  
               first_name={userInfo.first_name} 
-              last_name={userInfo.last_name}     
+              last_name={userInfo.last_name}  
+              
             />
           </>
         )}

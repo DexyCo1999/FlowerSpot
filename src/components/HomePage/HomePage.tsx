@@ -1,8 +1,6 @@
-import React , {useState} from "react";
+import  {useState} from "react";
 import styles from "./HomePage.module.scss";
 import path from "../../assets/images/search.png";
-import back_photo from "../../assets/images/pl-hero.png";
-import flower from "../../assets/images/flower.png";
 import FlowersList from "../FlowersList/FlowersList";
 
 

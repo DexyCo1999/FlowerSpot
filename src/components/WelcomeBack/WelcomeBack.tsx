@@ -2,8 +2,9 @@ import styles from "../WelcomeBack/WelcomeBack.module.scss";
 import Input from "../Input/Input";
 import React, { useState , useEffect, FormEvent} from "react";
 import Modal from "react-modal";
-import { symbolName } from "typescript";
-import axios from 'axios';
+import Auth from "../../services/authService";
+import LoginMessage from "../LoginMessage/LoginMessage";
+import {validateEmail, validatePassword } from "../../uts/validation";
 
 const customStyles = {
   content: {
@@ -18,16 +19,25 @@ const customStyles = {
 type propTypes = {
   show: boolean;
   onClose: Function;
+
 };
 
 
 function WelcomeBack({show, onClose}: propTypes) {
   
+  const[showModalMessage, setShowModalMessage] = useState(false);
+  const text = "Congratulations! You have successfully logged into FlowrSpot";
+
+  // Za hvatanje error message
+  const [errors, setErrors] = useState({
+    email: "",
+    pass: ""
+  });
 
   const [login, setLogin] = useState({
     email: "",
     pass: ""
-  })
+  }) 
 
   const{email,pass}=login;
 
@@ -37,14 +47,21 @@ function WelcomeBack({show, onClose}: propTypes) {
   
   const handleSubmit= (e:FormEvent)=>{
     e.preventDefault()
-    axios.post('https://flowrspot-api.herokuapp.com/api/v1/users/login', {
-      email: email, 
-      password: pass
-          
-    })
+    // postavljanje error message
+    const valEmail = validateEmail(email)
+    const valPass = validatePassword(pass);
+    if (valEmail.length > 0 || valPass.length>0) 
+    {
+      setErrors({email:valEmail, pass:valPass})
+      return;
+    };
+
+    
+    Auth.login(email,pass)  
     .then(function (response: any) {
       localStorage.setItem("auth_token", response.data.auth_token); 
-      onClose();
+      //onClose();
+      setShowModalMessage(true);
       console.log(response);
     })
     .catch(function (error) {
@@ -52,11 +69,12 @@ function WelcomeBack({show, onClose}: propTypes) {
     });
 
   }
-
-
-
-
-  return (
+ const onModalClose = () => {
+  setShowModalMessage(false)
+  onClose();
+}
+// Dijalozi rade ok sad, ali problem je sto ne ostane logovan
+  return !showModalMessage ?  (
       <Modal
         isOpen={show}
         onRequestClose={() => onClose()}
@@ -65,45 +83,25 @@ function WelcomeBack({show, onClose}: propTypes) {
       >
         <h2 className={styles.title}>Welcome Back</h2>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form}> 
           <div className={styles.inputInline}>
-            <Input type="string" name="email" value={email} onChange={(e)=>handleChange(e)} label={"Email Address"} />
-            <Input type="string" name="pass" value={pass} onChange={(e)=>handleChange(e)} label={"Password"} />
+            <Input id="name" type="string" name="email" value={email} onChange={(e)=>handleChange(e)} label={"Email Address"} />
+            <span className={styles.emailMessage}>{errors.email}</span>            
+            <Input id="password" type="password" name="pass" value={pass} onChange={(e)=>handleChange(e)} label={"Password"} />
+            <span className={styles.emailMessage}>{errors.pass}</span>  
           </div>
-          <button type="submit" className={styles.btLogin}>Login to your Account</button>
+          <button type="submit" className={styles.btLogin}>Login to your Account</button>          
         </form>
         <button className={styles.notRegister}>I don't want to register</button>
       </Modal>
+  ) : (    
+     <LoginMessage 
+    show = {showModalMessage}
+    onClose = {()=>onModalClose()}
+    text = {text}  
+    />
   );
 }
 
 export default WelcomeBack;
 
-/*
- return (
-      <div>
-
-<button onClick={openModal}>Open Modal</button>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <h2 className={styles.title}>Welcome Back</h2>
-        
-
-        <form className={styles.form}>
-            <div className={styles.inputDiv}>  
-            <Input value={""} label={"Email Address"} onChange={()=>{}}/>
-            <Input value={""} label={"Password"} onChange={()=>{}}/>
-            </div>
-            <button className={styles.btLogin}>Login to your Account</button>
-         </form>
-      </Modal>
-
-
-
-      </div>
-  );
-  */

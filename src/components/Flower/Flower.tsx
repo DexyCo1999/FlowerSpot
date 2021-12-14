@@ -1,7 +1,8 @@
+import {useState, useEffect} from 'react';
 import styles from "./Flower.module.scss";
 import photo from "../../assets/images/flower.png"
 import favPhoto from "../../assets/images/favouriteLogo.png"
-import {useState} from 'react';
+
 
 export interface IFlower {
   id: number;
@@ -13,6 +14,17 @@ export interface IFlower {
 }
 
 function Flower({ name, latin_name, sightings, favourite, profile_picture}: IFlower) {
+
+   
+  const [login, setLogin] = useState(false);
+
+  
+  const token = localStorage.getItem("auth_token");
+
+  // Napraviti da odmah nakon logina bude prikazano, a ne kada se rerenderuje?!
+    useEffect(() => {
+      setLogin(!!token); 
+    },[token]); 
 
     const [color, setColor] = useState(false);
 
@@ -37,9 +49,12 @@ function Flower({ name, latin_name, sightings, favourite, profile_picture}: IFlo
       <div>
         <button className={styles.sightings} style={{backgroundColor: color? '#ECBCB3'  : '#fff'}}> {sightings} sightings</button>
       </div>
-      <div className={styles.backFav} style={{backgroundColor: color? '#ECBCB3' : '#fff'}} onClick={()=>changeColor()}>
+      {login === false ? (<></>) : ( 
+        <div className={styles.backFav} style={{backgroundColor: color? '#ECBCB3' : '#fff'}} onClick={()=>changeColor()}>
         <img className={styles.favLogo} src={favPhoto}/>
-      </div>
+        </div>
+       ) }
+      
     </div>
   );
 }

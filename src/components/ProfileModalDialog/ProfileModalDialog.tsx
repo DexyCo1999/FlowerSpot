@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import {useState, useEffect} from 'react';
 import Modal from "react-modal";
 import styles from "../ProfileModalDialog/ProfileModalDialog.module.scss";
 import profileImage from "../../assets/images/profilePhoto.png";
 import left from "../../assets/images/left.png";
 import right from "../../assets/images/right.png";
-import axios from "axios";
-import { stringify } from "querystring";
-import { info } from "console";
+
 
 const customStyles = {
   content: {
@@ -18,48 +16,28 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     padding: "40px 80px"
   },
-};
+}
 
 type propTypes = {
   show: boolean,
   onClose: Function,
   first_name: string,
   last_name: string;
+  //logout: boolean;
+  
 }
-
-// export type propProfileInfo = {
-//   first_name: string,
-//   last_name: string;
-// }
 
 function ProfileModalDialog({show, onClose, first_name,last_name}: propTypes ) {
 
-  // const[information, setInformation] = useState({
-  //   first_name: "",
-  //   last_name: "",
-  //   id: 0
-  // });
+  // const[logout, setLogout] = useState(false);
 
-  // const{first_name,last_name} = information;
+  // useEffect(() => {
+    
+  //   return () => {
+  //     localStorage.removeItem("auth_token");
+  //   }
+  // }, [logout])
 
-  // useEffect(()=>{
-  //   axios
-  //     .get("https://flowrspot-api.herokuapp.com/api/v1/users/me",{
-  //       headers: {Authorization: `Bearer ${localStorage.getItem("auth_token")}`}
-  //     })
-  //     .then(function(response:any){
-  //     //  setInformation({ 
-  //     //   //  first_name: response.data.user.first_name,
-  //     //   //  last_name:response.data.user.last_name
-  //     //  })
-  //     setInformation(response.data.user);
-  //      console.log(response.data);
-  //     })
-  //     .catch(function(error){
-  //       console.log(error);
-  //     });
-  // },[])
-  
   return (
     
       <Modal
@@ -103,7 +81,7 @@ function ProfileModalDialog({show, onClose, first_name,last_name}: propTypes ) {
                 <div>{first_name}.{last_name}@gmail.com</div>
               </div>
             </div>
-            <button className={styles.logout}>Logout</button>
+            <button className={styles.logout} onClick={()=>localStorage.removeItem("auth_token")}>Logout</button>
           </div>
         </form>
       </Modal>
