@@ -1,0 +1,48 @@
+.header{
+    background-color: white;
+    position:relative;
+    margin-right: 10px;
+    display: block;
+  
+}
+.items{
+    //background-color: rgb(156, 138, 138);
+    background-color: transparent;
+    color: #EAA79E;
+    font-weight: bold;
+    // margin-top: 20%;
+    // margin-right: 10%;
+    overflow-y: hidden;
+    
+}
+.ham{
+    width: 35px;
+    height: 5px;
+    background-color: rgb(122, 48, 48);
+    margin: 6px 0;
+    display: flex;
+   
+}
+.icon{
+    position: relative;
+    right: 0px;
+}
+.menu{
+    width: 300px;
+   
+}
+
+.bmmenu {
+    background: #373a47;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+  }
+
+
+
+
+
+  
+
+
+  

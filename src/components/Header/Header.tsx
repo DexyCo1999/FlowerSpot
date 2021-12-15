@@ -7,6 +7,7 @@ import WelcomeBack from "../WelcomeBack/WelcomeBack";
 import ProfileModalDialog from "../ProfileModalDialog/ProfileModalDialog";
 import profilePhoto from "../../assets/images/profilePhoto2.png";
 import informationUser from "../../services/userInfoService";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 
 
 
@@ -16,6 +17,7 @@ export default function Header() {
   const [showProfileModal, setProfileModal] = useState(false);
 
   const [login, setLogin] = useState(false);
+  const [click, setClick] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     first_name: "",
@@ -43,59 +45,63 @@ export default function Header() {
   }, [token]); //Da bi se osvezavalo cim se neko loguje, kreira nalog
 
   return (
-    <div className={styles.header}>
-      <div className={styles.flowrSpot}>
-        <img src={logo} alt="" />
+    <div className={styles.header} >
+      <div className={styles.flowrSpot} >
+        <img src={logo} alt="" onClick={()=>setClick(true)}/>
         FlowrSpot
       </div>
 
-      <div className={styles.right}>
-        <div className="flowers">Flowers</div>
-        <div className="LatestSigh">Latest Sightings</div>
-        <div className="favs"> Favourites </div>
-
-        {login === false ? (
-          <>
-            <div
-              className={styles.login}
-              onClick={() => setShowModalLogin(true)}
-            >
-              Login
-            </div>
-            <WelcomeBack
-              show={showModalLogin}
-              onClose={() => setShowModalLogin(false)}
-            />
-            <div
-              className={styles.account}
-              onClick={() => setShowModalSignIn(true)}
-            >
-              New Account
-            </div>
-            <CreateAccount
-              show={showModalSignIn}
-              onClose={() => setShowModalSignIn(false)}
-            />
-          </>
-        ) : (
-          <>
-            <div
-              className={styles.profile}
-              onClick={() => setProfileModal(true)}
-            >
-              {userInfo.first_name} {userInfo.last_name}
-            </div>
-            <img className={styles.photo} src={profilePhoto} alt={""} />
-            <ProfileModalDialog
-              show={showProfileModal}
-              onClose={() => setProfileModal(false)}  
-              first_name={userInfo.first_name} 
-              last_name={userInfo.last_name}  
-              
-            />
-          </>
-        )}
-      </div>
+     {!click? (
+      
+        <div className={styles.right}>
+          <div className="flowers">Flowers</div>
+          <div className="LatestSigh">Latest Sightings</div>
+          <div className="favs"> Favourites </div>
+  
+          {login === false ? (
+            <>
+              <div
+                className={styles.login}
+                onClick={() => setShowModalLogin(true)}
+              >
+                Login
+              </div>
+              <WelcomeBack
+                show={showModalLogin}
+                onClose={() => setShowModalLogin(false)}
+              />
+              <div
+                className={styles.account}
+                onClick={() => setShowModalSignIn(true)}
+              >
+                New Account
+              </div>
+              <CreateAccount
+                show={showModalSignIn}
+                onClose={() => setShowModalSignIn(false)}
+              />
+            </>
+          ) : (
+            <>
+              <div
+                className={styles.profile}
+                onClick={() => setProfileModal(true)}
+              >
+                {userInfo.first_name} {userInfo.last_name}
+              </div>
+              <img className={styles.photo} src={profilePhoto} alt={""} />
+              <ProfileModalDialog
+                show={showProfileModal}
+                onClose={() => setProfileModal(false)}  
+                first_name={userInfo.first_name} 
+                last_name={userInfo.last_name} 
+                
+              />
+            </>
+          )}
+        </div>
+     ):(<HamburgerMenu/>)}
     </div>
-  );
+  )
 }
+

@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
+
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <App/> 
+    {/* <HamburgerMenu/> */}
+    {/* <MenuHamburger/> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
