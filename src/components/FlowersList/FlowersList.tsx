@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import Flower, { IFlower } from "../Flower/Flower";
 import styles from "./FlowersList.module.scss";
 import getFlower from "../../services/flowerService";
+import { useSelector } from "react-redux";
+import { AuthState} from "../../store/auth/types";
+import { RootState } from "../../store/store";
+import { addFavorite } from "../../store/auth/actions";
+import FavoriteFlowers from "../FavoritesFlowers/FavoriteFlowers";
 
 interface IProps {
   data?: Array<IFlower>;
@@ -11,6 +16,13 @@ interface IProps {
 function FlowersList({ search }: IProps) {
   const [flowers, setFlowers] = useState<Array<IFlower>>([]); //svi
   const [filterFlowers, setFilterFlowers] = useState<Array<IFlower>>([]); //izlistani
+
+
+  // Selektor kako bih dobila one koji imaju TRUE obelezje
+  // const favFlower = useSelector<RootState, addFavoriteState>(    
+  //     state => state.loginReducer.addFavorite
+  // )
+  
 
   // Filtriranje
   useEffect(() => {
@@ -38,11 +50,12 @@ function FlowersList({ search }: IProps) {
       {filterFlowers?.map((flower) => (
         <div key={flower.id}>
           <Flower
+            flower ={flower}
             id={flower.id}
             name={flower.name}
             latin_name={flower.latin_name}
             sightings={flower.sightings}
-            favourite={flower.favourite}
+            favorite={flower.favorite}
             profile_picture={flower.profile_picture}
           />
         </div>

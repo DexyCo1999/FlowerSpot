@@ -8,8 +8,10 @@ import {
   validateEmail,
   validatePassword,
   validateName,
-  validateDate
+  validateDate,
 } from "../../uts/validation";
+import { useDispatch } from "react-redux";
+import { signIn } from "../../store/auth/actions";
 
 const customStyles = {
   content: {
@@ -31,13 +33,15 @@ function CreateAccount({ show, onClose }: propTypes) {
   const [showModalMessage, setShowModalMessage] = useState(false);
   const text = "Congratulations! You have successfully sign up into FlowrSpot";
 
+  const dispatch = useDispatch();
+
   // Za hvatanje error message
   const [errors, setErrors] = useState({
     email: "",
     pass: "",
     firstName: "",
     lastName: "",
-    dateOfBirthError: ""
+    dateOfBirthError: "",
   });
 
   // Za prikazivanje podataka
@@ -75,27 +79,35 @@ function CreateAccount({ show, onClose }: propTypes) {
         pass: valPass,
         firstName: valFirstName,
         lastName: valLastName,
-        dateOfBirthError: valDate
+        dateOfBirthError: valDate,
       });
       return;
-    };
-
+    }
     Auth.signIn(email, pass, firstName, lastName, dateOfBirth)
       .then(function (response: any) {
         localStorage.setItem("auth_token", response.data.auth_token);
         //onClose();
         setShowModalMessage(true);
         console.log(response);
+        dispatch(
+          signIn({
+            email,
+            pass,
+            firstName,
+            lastName,
+            dateOfBirth,
+          })
+        );
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   const onModalClose = () => {
     setShowModalMessage(false);
     onClose();
-  }
+  };
 
   return !showModalMessage ? (
     <Modal
@@ -123,8 +135,10 @@ function CreateAccount({ show, onClose }: propTypes) {
             label={"Last name"}
           />
         </div>
-        <span className={styles.errorMessage}>{errors.firstName || errors.lastName}</span> 
-       
+        <span className={styles.errorMessage}>
+          {errors.firstName || errors.lastName}
+        </span>
+
         <div className={styles.inputInline}>
           <Input
             type="date"
@@ -133,7 +147,7 @@ function CreateAccount({ show, onClose }: propTypes) {
             onChange={(e) => handleChange(e)}
             label={"Date of Birth"}
           />
-          <span className={styles.errorMessage}>{errors.dateOfBirthError}</span> 
+          <span className={styles.errorMessage}>{errors.dateOfBirthError}</span>
           <Input
             type="text"
             name="email"
@@ -161,7 +175,7 @@ function CreateAccount({ show, onClose }: propTypes) {
     <LoginMessage
       show={showModalMessage}
       onClose={() => onModalClose()}
-      text={text}      
+      text={text}
     />
   );
 }

@@ -5,6 +5,12 @@ import Modal from "react-modal";
 import Auth from "../../services/authService";
 import LoginMessage from "../LoginMessage/LoginMessage";
 import {validateEmail, validatePassword } from "../../uts/validation";
+import {useDispatch} from "react-redux";
+import { RootState } from "../../store/store";
+import { AuthState } from "../../store/auth/types";
+import { login as loginUser } from "../../store/auth/actions";
+
+
 
 const customStyles = {
   content: {
@@ -28,6 +34,8 @@ function WelcomeBack({show, onClose}: propTypes) {
   const[showModalMessage, setShowModalMessage] = useState(false);
   const text = "Congratulations! You have successfully logged into FlowrSpot";
 
+      // definisanje dispatch
+  const dispatch = useDispatch(); 
   // Za hvatanje error message
   const [errors, setErrors] = useState({
     email: "",
@@ -56,13 +64,17 @@ function WelcomeBack({show, onClose}: propTypes) {
       return;
     };
 
+
     
-    Auth.login(email,pass)  
+    Auth.login(email,pass) 
+    // dispecujem akciju 
     .then(function (response: any) {
       localStorage.setItem("auth_token", response.data.auth_token); 
       //onClose();
       setShowModalMessage(true);
       console.log(response);
+      dispatch(loginUser({ username:email, pass}))
+      
     })
     .catch(function (error) {
       console.log(error);

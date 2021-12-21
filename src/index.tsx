@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
-
+import {Provider} from 'react-redux';
+import store from "./store/store";
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/> 
+    <Provider store={store}><App/></Provider>
+    
     {/* <HamburgerMenu/> */}
     {/* <MenuHamburger/> */}
   </React.StrictMode>,

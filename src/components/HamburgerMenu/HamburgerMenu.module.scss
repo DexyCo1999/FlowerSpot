@@ -3,22 +3,27 @@
     position:relative;
     margin-right: 10px;
     display: block;
+    height: 50%;
   
 }
 .items{
     //background-color: rgb(156, 138, 138);
     background-color: transparent;
-    color: #EAA79E;
+    color: #723830;
     font-weight: bold;
     // margin-top: 20%;
     // margin-right: 10%;
     overflow-y: hidden;
+    font-style: italic;
+    padding: 5px 5px;
+    cursor: pointer;
+    
     
 }
 .ham{
     width: 35px;
     height: 5px;
-    background-color: rgb(122, 48, 48);
+    background-color: #949EA0;
     margin: 6px 0;
     display: flex;
    
@@ -33,9 +38,11 @@
 }
 
 .bmmenu {
-    background: #373a47;
+    background: #fff;
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
+    max-height: 25%;
+    overflow-y: scroll;
   }
 
 

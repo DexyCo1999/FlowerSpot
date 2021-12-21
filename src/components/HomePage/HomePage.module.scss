@@ -1,9 +1,13 @@
+@import "../../breakPoints.module.scss";
+
+
 .content{
-    height: 80vh;    
+    height: 80vh;  
     background: url('../../assets/images/pl-hero.png');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
+    width: 100%;
     justify-content: center;
     flex-direction: column;
     img{
@@ -35,6 +39,7 @@ text-align: center;
     line-height: 18px;
     width:  500px;
     height: 50px;
+    
    
 
 }
@@ -58,3 +63,27 @@ text-align: center;
     flex-direction: column; //menja po y osi, i zato koristim align-items, a ne justify content
 
 }
+
+// @media only screen and (max-width: $breakpoint-smallest) {
+//     .inputDiv {
+//         position: relative; //glavni objekat relativan
+//         width:30%;
+//         height:20%;
+
+        
+        
+//     }
+//     .input{
+//         display: flex;
+//         justify-content: center;
+//         width: 400%;
+//         margin-top: 50%;
+
+
+//     }
+//     .content{
+//         display: flex;
+//         background-position: center;
+//         background-size: cover;
+//     }
+//   }
