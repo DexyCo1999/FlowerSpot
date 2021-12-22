@@ -6,6 +6,7 @@ export interface IInput{
     value: string | Date;
     type?: string;
     name?: string;
+    id?: string;
     onChange: (e:React.ChangeEvent <HTMLInputElement>)=>void;
 
 }

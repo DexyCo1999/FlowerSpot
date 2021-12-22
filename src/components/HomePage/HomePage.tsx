@@ -1,9 +1,8 @@
-import React , {useState} from "react";
+import  {useState} from "react";
 import styles from "./HomePage.module.scss";
 import path from "../../assets/images/search.png";
-import back_photo from "../../assets/images/pl-hero.png";
-import flower from "../../assets/images/flower.png";
 import FlowersList from "../FlowersList/FlowersList";
+import Header from "../Header/Header";
 
 
 export interface IHomePage{
@@ -69,6 +68,7 @@ export default function HomePage() {
 
   return (
     <>
+    <Header/>
     <div className={styles.content}>
       <div className={styles.text_contenet}>
         <h1 className={styles.title}>Discover flowers around you</h1>

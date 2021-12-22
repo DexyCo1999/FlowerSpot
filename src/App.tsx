@@ -8,18 +8,24 @@ import CreateAccount from './components/CreateAccount/CreateAccount';
 import Input from './components/Input/Input';
 import WelcomeBack from './components/WelcomeBack/WelcomeBack';
 import ProfileModalDialog from './components/ProfileModalDialog/ProfileModalDialog';
+import FavoriteFlowers from './components/FavoritesFlowers/FavoriteFlowers';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
 
-  //const[value, setValue] = useState("");
+  
 
   return (
+
     <div className="App">
-      <Header />
-      <HomePage/>
       
-     
       
+  <BrowserRouter>
+    <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/favs" element={<FavoriteFlowers/>}></Route>
+    </Routes>
+  </BrowserRouter> 
     </div>
   );
 }
@@ -35,4 +41,3 @@ function App() {
      */
 
 export default App;
-//<Input label={''} value={value} onChange={(e)=>setValue(e.target.value)}/>
