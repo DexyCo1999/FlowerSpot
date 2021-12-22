@@ -87,7 +87,6 @@ function HamburgerMenu({className}:IHamburger) {
         width={"200px"}
         className={styles.bmmenu}
       >
-        {/* <div className={styles.items}> */}
         <span className={styles.items} onClick={()=>setOpen(false)}>Flowers</span>
         <span className={styles.items} onClick={()=>setOpen(false)}>Latest Sightings</span>
         <span className={styles.items} onClick={()=>setOpen(false)}> Favourites </span>

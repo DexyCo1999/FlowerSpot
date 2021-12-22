@@ -25,38 +25,30 @@ export default function Header() {
   const [click, setClick] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();  
 
-  const navigate = useNavigate();
+  //         Ispis informacija LOGIN
+  // const userI = useSelector<RootState, loginState>(
+  //   state => state.loginReducer.login
+  // )
 
-  const [userInfo, setUserInfo] = useState({
-    id: 0,
-    first_name: "",
-    last_name: ""
-  });
 
-  // ispis informacija login
-  const userI = useSelector<RootState, loginState>(
-    state => state.loginReducer.login
-  )
-  // ispis informacija sign in
-  const userII = useSelector<RootState, signIn>(
-    state=>state.loginReducer.signIn
-  )
-  // ispis informacija kada je pozvan PROFILE DETAILS
+  //        Ispis informacija SIGN UP
+  // const userII = useSelector<RootState, signIn>(
+  //   state=>state.loginReducer.signIn
+  // )
+
+
+  // Ispis informacija kada je pozvan PROFILE DETAILS
   const userInfoDetails = useSelector<RootState, profileDetails> (
     state=> state.loginReducer.profileDetails
   )
 
-
-
-   // Ispit informacija o favourite - PROBA DA LI RADI OK 
-   const favouriteConsoleLog = useSelector<RootState, loginState>(
-    state=>state.loginReducer.postFavourite
-  )
-
-  console.log(favouriteConsoleLog);
-
-
+  //  // Ispit informacija o favourite - PROBA DA LI RADI OK 
+  //  const favouriteConsoleLog = useSelector<RootState, loginState>(
+  //   state=>state.loginReducer.postFavourite
+  // )
+  
   const token = localStorage.getItem("auth_token");
   useEffect(() => {
     setLogin(!!token); // --> Ako postoji token, korisnik je logovan
@@ -140,7 +132,6 @@ export default function Header() {
                 onClose={() => setProfileModal(false)}  
                 // first_name={userInfo.first_name} 
                 // last_name={userInfo.last_name} 
-
                 first_name={userInfoDetails.firstName}
                 last_name={userInfoDetails.lastName}
               />

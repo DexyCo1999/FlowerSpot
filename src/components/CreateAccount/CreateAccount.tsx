@@ -60,7 +60,7 @@ function CreateAccount({ show, onClose }: propTypes) {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // postavljanje error message
+    // Postavljanje error message
     const valEmail = validateEmail(email);
     const valPass = validatePassword(pass);
     const valFirstName = validateName(firstName);
@@ -86,7 +86,6 @@ function CreateAccount({ show, onClose }: propTypes) {
     Auth.signIn(email, pass, firstName, lastName, dateOfBirth)
       .then(function (response: any) {
         localStorage.setItem("auth_token", response.data.auth_token);
-        //onClose();
         setShowModalMessage(true);
         console.log(response);
         dispatch(
@@ -117,7 +116,6 @@ function CreateAccount({ show, onClose }: propTypes) {
       contentLabel="Example Modal"
     >
       <h2 className={styles.title}>Create an Account</h2>
-
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.name}>
           <Input
@@ -138,7 +136,6 @@ function CreateAccount({ show, onClose }: propTypes) {
         <span className={styles.errorMessage}>
           {errors.firstName || errors.lastName}
         </span>
-
         <div className={styles.inputInline}>
           <Input
             type="date"

@@ -14,16 +14,9 @@ interface IProps {
 }
 
 function FlowersList({ search }: IProps) {
-  const [flowers, setFlowers] = useState<Array<IFlower>>([]); //svi
-  const [filterFlowers, setFilterFlowers] = useState<Array<IFlower>>([]); //izlistani
-
-
-  // Selektor kako bih dobila one koji imaju TRUE obelezje
-  // const favFlower = useSelector<RootState, addFavoriteState>(    
-  //     state => state.loginReducer.addFavorite
-  // )
+  const [flowers, setFlowers] = useState<Array<IFlower>>([]); 
+  const [filterFlowers, setFilterFlowers] = useState<Array<IFlower>>([]); 
   
-
   // Filtriranje
   useEffect(() => {
     const filter = flowers.filter((flower) =>

@@ -38,94 +38,50 @@ function Flower({
 }: IFlower) {
 
   const [login, setLogin] = useState(false);
- 
-
-
-
-  //  // ispis informacija kada je pozvan PROFILE DETAILS
-  //  const userInfoDetails = useSelector<RootState, profileDetails> (
-  //   state=> state.loginReducer.profileDetails
-  // )
-
-  // ----------------------------- DAMJAN RESENJA
-  // // Napraviti da odmah nakon logina bude prikazano, a ne kada se rerenderuje?!
-  // useEffect(() => {
-  //   //  const token = localStorage.getItem("auth_token");
-  //   // console.log(userInfoDetails, "ovo je username");
-  //   if (userInfoDetails.username !== "") {
-  //     setLogin(true);
-  //   }
-  // }, [userInfoDetails]);
-
-
-
+  
   const favFlower = useSelector<RootState, Array<IFlower>>(    
       state => state.loginReducer.addFavorite
   ) 
-
-  // const removeFavFlower = useSelector<RootState, Array<IFlower>>(    
-  //   state => state.loginReducer.removeFavorite
-  // )
-
-  // smestamo azuriran niz od remove
-  // const removeFavFlower = useSelector<RootState, Array<IFlower>>(
-  //   state => state.loginReducer.removeFavorite
-  // )
 
   const token = localStorage.getItem("auth_token");
   useEffect(() => {
     setLogin(!!token); // --> Ako postoji token, korisnik je logovan
   },[token]);
 
-  const [color, setColor] = useState(false);
-
-
-
-  const changeColor = () => {    
-  
+  const changeColor = () => {      
     flower.favorite = !flower.favorite;
-  }; // Boja se menja na klik, kao i vrednost da li je selektovano il ne.
-
+  }; 
   const dispatch = useDispatch();
 
-  const setFavourite = () => {     
-  
+  const setFavourite = () => {   
      let same = false;     
      favFlower.forEach(damjan => {
-
       if(flower.id === damjan.id){
         same = true;
         return;       
       }  
      });     
 
-      if(same){ 
-             
+      if(same){              
         changeColor();
         const filter = favFlower.filter((damjan) => (damjan.id !== flower.id));
         console.log(filter);
         dispatch(removeFavorite(filter));  
-        console.log("NISAM VISE SELEKTOVAN");     // nalazi se u nizu i kada je selektovan 
+        console.log("NISAM VISE SELEKTOVAN");  
         console.log(flower.favorite);
         console.log(favFlower);
       }
       
       if(!same)
-      {
-        
+      {        
         changeColor();
         dispatch(addFavorite([...favFlower,flower]));    
         console.log("SAD JESAM SELEKTOVAN");   
         console.log(flower.favorite);  
-        console.log(favFlower);
-        
-  
-      } 
+        console.log(favFlower);      
+      }    
     
-    
-
-    // Pokusaj koriscenja REDUXA -------> GRESKA NA BACKENDU!?
-    // console.log(userInfoDetails.id);
+    // ----------------------------------- Pokusaj koriscenja REDUXA -------> GRESKA NA BACKENDU!? 
 
     // FlowerService.postFavouriteFlowers(id, userInfoDetails.id, {
     //   id,
@@ -140,10 +96,6 @@ function Flower({
     //   console.log(error);
     // });
   };
-
-
-
-
 
   return (
     <div className={styles.content}>
@@ -176,8 +128,7 @@ function Flower({
     </div>
   );
 }
-    
-      
+        
 
 export default Flower;
 
